@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WEBAPI_PATIKA_BOOKSTORE.DBOperations;
 
 namespace WEBAPI_PATIKA_BOOKSTORE
 {
@@ -32,6 +34,8 @@ namespace WEBAPI_PATIKA_BOOKSTORE
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEBAPI_PATIKA_BOOKSTORE", Version = "v1" });
             });
+
+            services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "BookStoreDb"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
